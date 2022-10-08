@@ -29,6 +29,8 @@
 1. make docker-build or docker build --tag s4_gradio_demo .
 2. make docker-portmap (port 8080 is mapped to public gradio url) or docker run -t -p 8080:8080 s4_gradio_demo:latest
 
+or docker pull premavasagam/mlops:s4_gradio_demo 
+
 ### Updates made
 1. Add forward_jit(image) to src/models/timm_module.py
 2. create cifar10_demo_scripted.py file by importing timm packages, adding classes of cifar10 to alist/dictionary, and a function to predict images, update config file with cifar10_demo_scripted.yaml, change input image type to "pil" in gradio interface.
