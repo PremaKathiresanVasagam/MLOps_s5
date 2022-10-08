@@ -20,3 +20,4 @@
 9. Now python3 src/train.py and it automatically evaluates as well since it is a pretrained model.
 
 
+# MLOps_s4
