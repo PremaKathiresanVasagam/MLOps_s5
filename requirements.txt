@@ -1,5 +1,5 @@
 # --------- pytorch --------- #
--f https://download.pytorch.org/whl/torch_stable.html
+--extra-index-url https://download.pytorch.org/whl/cpu
 torch==1.10.1+cpu
 torchvision==0.11.2+cpu
 timm==0.6.7

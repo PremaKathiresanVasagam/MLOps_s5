@@ -46,12 +46,16 @@ debug: ## Enter debugging mode with pdb
 
 docker-build: ##Build Docker image
 	@echo Build docker image...
-	docker build --tag cifar10 .
+	docker build --tag s4_gradio_demo .
 
 docker-train: ##Run Docker for train
 	@echo Running model training...
-	docker run --rm -it cifar10 python3 src/train.py
+	docker run --rm -it s4_gradio_demo python3 src/train.py
 
 docker-test: ##Run Docker for test
 	@echo Running model inferencing...
 	docker run --rm -it cifar10 python3 src/eval.py
+
+docker-portmap: ##Run docker for gradio demo at 8080
+	@echo Running gradio demo...
+	docker run -t -p 8080:8080 s4_gradio_demo:latest

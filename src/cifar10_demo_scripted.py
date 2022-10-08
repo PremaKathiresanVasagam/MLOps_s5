@@ -65,7 +65,7 @@ def demo(cfg: DictConfig) -> Tuple[dict, dict]:
         inputs=gr.Image(type='pil'),
         outputs=gr.Label(num_top_classes=10),
     )
-    demo.launch(share=True)
+    demo.launch(server_name="0.0.0.0", share=True)
 
 @hydra.main(
     version_base="1.2", config_path=root / "configs", config_name="cifar10_demo_scripted.yaml"
