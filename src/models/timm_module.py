@@ -4,7 +4,8 @@ import torch
 from pytorch_lightning import LightningModule
 from torchmetrics import MaxMetric
 from torchmetrics.classification.accuracy import Accuracy
-
+import torch.nn.functional as F
+from torchvision import transforms as T
 
 class TIMMLitModule(LightningModule):
     """Example of LightningModule for CIFAR10 classification.
@@ -46,8 +47,23 @@ class TIMMLitModule(LightningModule):
         # for logging best so far validation accuracy
         self.val_acc_best = MaxMetric()
 
+        self.predict_transform = T.Normalize((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261))
+
     def forward(self, x: torch.Tensor):
         return self.net(x)
+
+    @torch.jit.export
+    def forward_jit(self, x: torch.Tensor):
+
+        with torch.no_grad():
+            # transform the inputs
+            x = self.predict_transform(x)
+
+            #forward pass
+            logits = self(x)
+            probabilities = F.softmax(logits[0], dim=-1)
+        
+        return probabilities
 
     def on_train_start(self):
         # by default lightning executes validation step sanity checks before training starts,

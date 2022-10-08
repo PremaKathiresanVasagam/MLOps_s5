@@ -17,9 +17,13 @@ hydra-optuna-sweeper==1.2.0
 # mlflow
 # comet-ml
 
+# --------- demo -----------#
+gradio==3.3.1
+
 # --------- others --------- #
 pyrootutils     # standardizing the project root setup
 pre-commit      # hooks for applying linters on commit
 rich            # beautiful text formatting in terminal
 pytest          # tests
 # sh            # for running bash commands in some tests (linux/macos only)
+setuptools==59.5.0
