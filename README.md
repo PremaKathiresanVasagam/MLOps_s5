@@ -35,4 +35,14 @@ or docker pull premavasagam/mlops:s4_gradio_demo
 1. Add forward_jit(image) to src/models/timm_module.py
 2. create cifar10_demo_scripted.py file by importing timm packages, adding classes of cifar10 to alist/dictionary, and a function to predict images, update config file with cifar10_demo_scripted.yaml, change input image type to "pil" in gradio interface.
 
-# MLOps_s4
+# MLOps_s5
+
+To give permission to docker:
+docker ps
+"Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied"
+
+sudo usermod -aG docker $USER
+sudo chmod 777 /var/run/docker.sock
+
+docker ps
+
