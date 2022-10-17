@@ -19,6 +19,7 @@ import torch
 import hydra
 import gradio as gr
 from omegaconf import DictConfig
+import boto3
 
 from src import utils
 
@@ -33,12 +34,25 @@ def demo(cfg: DictConfig) -> Tuple[dict, dict]:
         Tuple[dict, dict]: Dict with metrics and dict with all instantiated objects.
     """
 
-    assert cfg.ckpt_path
+    # assert cfg.ckpt_path
+
+    # log.info("Running Demo")
+
+    # log.info(f"Instantiating scripted model <{cfg.ckpt_path}>")
+    # model = torch.jit.load(cfg.ckpt_path)
+
+    # log.info(f"Loaded Model: {model}")
+    #s3://cifar10-demo-s5/model.script.pt
 
     log.info("Running Demo")
 
-    log.info(f"Instantiating scripted model <{cfg.ckpt_path}>")
-    model = torch.jit.load(cfg.ckpt_path)
+    ckpt_path = 'model.script.pt'
+
+    s3 = boto3.client('s3')
+    s3.download_file('cifar10-demo-s5', 'model.script.pt', 'model.script.pt')
+    
+    log.info(f"Instantiating scripted model <{ckpt_path}>")
+    model = torch.jit.load(ckpt_path)
 
     log.info(f"Loaded Model: {model}")
 
